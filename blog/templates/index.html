@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blog de Busqueda</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.1.0/themes/reset.css"
+         crossorigin="anonymous" />
+         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+        <script src="https://cdn.jsdelivr.net/npm/instantsearch.js"></script>
+        
+    </head>
+    <body class="blog-body">
+        <div id="app">
+            <!-- Cuadro de búsqueda -->
+            <input type="search" id="search-input" placeholder="Buscar...">
+            <button id="search-button">Buscar</button>
+    
+            <!-- Resultados de búsqueda -->
+            <div id="search-results"></div>
+    
+            <!-- Contenido de otras vistas -->
+            {% block content %}{% endblock %}
+        </div>
+        </div>
+        <a href="{% url 'post' %}" class="btn">Crear Post</a>
+
+        {% for post in posts %}
+            <div class="post">
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.content }}</p>
+                <a href="{% url 'post' pk=post.pk %}" class="btn">Ver Detalle</a>
+            </div>
+        {% endfor %}
+    
+        <a href="{% url 'comment' %}" class="btn">Crear Comentario</a>
+        {% for comment in comments %}
+            <div class="comment">
+                <h3>{{ comment.content }}</h3>
+                <a href="{% url 'comment-' pk=comment.pk %}" class="btn">Ver Detalle del Comentario</a>
+            </div>
+        {% endfor %}
+    
+        <a href="{% url 'login' %}" class="btn">login</a>
+    </body>
+</html>

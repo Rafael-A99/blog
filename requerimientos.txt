@@ -1,0 +1,7 @@
+Django>=3.0,<4.0
+Restframework
+Mail
+algoliasearch_django
+djoser
+
+
